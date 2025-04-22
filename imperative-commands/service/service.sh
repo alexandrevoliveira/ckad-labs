@@ -7,6 +7,7 @@
 # -o yaml: This will output the resource definition in YAML format on the screen.
 
 ## Service
+
 # Create a Service named redis-service of type ClusterIP to expose pod redis on port 6379
 
 kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml

@@ -7,6 +7,7 @@
 # -o yaml: This will output the resource definition in YAML format on the screen.
 
 ## Deployment
+
 # Create a deployment
 
 kubectl create deployment --image=nginx nginx
