@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+spec:
+  containers:
+  - name: data-processor
+    image: data-processor
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: size
+            operator: In
+            values:
+              - Large
+              - Medium
+
+# types of nodeAffinity:
+# 1. requiredDuringSchedulingIgnoredDuringExecution -> The scheduler will mandate
+# that the pod be placed on a node with the given affinity rules.
+# If can not find one the pod will not be schedule. This type will be used in
+# cases where the placement of the pod is crucial. Ignored during execution means
+# that any change on the environment (e.g.: remove a node label) will not affect
+#  any running pod.
+
+# 2. preferredDuringSchedulingIgnoredDuringExecution -> If the placement of the
+# pod is less important than running the workload itself than this type preferred
+# will be used. In cases where a matching node is not found, the scheduler will
+# simply ignore node affinity rules and place the pod on any available node.
+
+# 3. requiredDuringSchedulingRequiredDuringExecution -> Same as requiredDuringSchedulingIgnoredDuringExecution
+# for scheduling a pod, but will evict any pods that are running on nodes that
+# do not meet affinity rules.
