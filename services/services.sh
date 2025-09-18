@@ -7,3 +7,10 @@
 
 # Create a service
 kubectl create -f node-port-service-definition.yaml
+
+# Create a service using imperative command
+kubectl create service nodeport myapp-service --node-port=30008 --tcp=80:80
+kubectl create svc clusterip myapp-service --tcp=80:80
+
+# Create the definition file
+kubectl create svc nodeport myapp-service --node-port=30008 --tcp=80:80 --dry-run=client -o=yaml > ./services/myapp-service.yaml
